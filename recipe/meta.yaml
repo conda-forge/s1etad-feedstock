@@ -6,22 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 2c16834a6f74eb20337c7c7b354289c3b2f0a7ed2b3ca844859f2276224237b9
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - s1etad-cli = s1etad.cli.main:main
 
 requirements:
   host:
-    - python >=3.8
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.8
+    - python >={{ python_min }}
     - numpy
     - scipy
     - lxml
@@ -40,6 +41,7 @@ test:
     - s1etad.cli
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
