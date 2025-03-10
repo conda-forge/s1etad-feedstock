@@ -1,5 +1,5 @@
 {% set name = "s1etad" %}
-{% set version = "0.5.4" %}
+{% set version = "0.5.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2c16834a6f74eb20337c7c7b354289c3b2f0a7ed2b3ca844859f2276224237b9
+  sha256: 232994bb5f1327ed63825e9a88ee6896ef482001b2989fbe943d74f6f3aadf15
 
 build:
   noarch: python
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
   entry_points:
     - s1etad-cli = s1etad.cli.main:main
