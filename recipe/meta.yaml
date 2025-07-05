@@ -1,5 +1,6 @@
 {% set name = "s1etad" %}
-{% set version = "0.5.5" %}
+{% set version = "0.6.1" %}
+{% set python_min = "3.10" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 232994bb5f1327ed63825e9a88ee6896ef482001b2989fbe943d74f6f3aadf15
+  sha256: d127c07cafb6c1a5cf7aff5f46ef8e82be9f06a18a3207dda182a7ba65afb32b
 
 build:
   noarch: python
@@ -36,14 +37,20 @@ requirements:
     - argcomplete
 
 test:
+  source_files:
+    - tests
   imports:
     - s1etad
     - s1etad.cli
   requires:
     - pip
     - python {{ python_min }}
+    - pytest
+    - pytest-lazy-fixtures
+    - pooch
   commands:
     - pip check
+    - python -m pytest tests
 
 about:
   home: https://github.com/s1tools/s1-etad
@@ -53,7 +60,7 @@ about:
     Sentinel-1 Extended Timing Annotation Datasets.
 
     The current version of the package is based on the Product Format
-    Specification Document (ETAD-DLR-PS-0014) Issue 1.1.
+    Specification Document (ETAD-DLR-PS-0014) Issue 1.12.
 
     Main features provided are:
 
